@@ -1,0 +1,53 @@
+p {
+  margin-top: 0;
+}
+
+.crypto {
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.cryptoWrapper {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  align-items: center;
+  margin-left: 20px;
+  padding-top: 8px;
+  padding-bottom: 8px;
+}
+
+.cryptoWrapper div:nth-child(3) {
+  padding-left: 12px;
+  align-items: center;
+}
+
+.cryptoInfo {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.cryptonName {
+  color: #333333;
+  font-weight: 700;
+  font-size: 17px;
+}
+
+.cryptonImage {
+  height: 40px;
+}
+
+.positiveChange {
+  color: green;
+}
+
+.negativeChange {
+  color: red;
+}
+
+.rightArrow {
+  margin-right: 20px;
+}
