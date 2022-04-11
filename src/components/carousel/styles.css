@@ -1,7 +1,22 @@
 .carouselContainer {
   max-height: 300px;
   display: flex;
+  flex-direction: column;
+  justify-content: center;
   align-items: center;
+  margin-left: auto;
+  margin-right: auto;
+  background: url('../../assets/bkCrypto.png');
+  color: #fff;
+}
+
+.carouselContainer h1 {
+  padding-bottom: 5px;
+}
+
+.carouselContainer a {
+  color: #fff;
+  text-decoration: none;
 }
 
 .carousel {
@@ -13,19 +28,11 @@
 .carouselItem {
   display: 'flex';
   flex-direction: 'column';
+  justify-content: center;
   align-items: 'center';
   cursor: 'pointer';
   text-transform: 'uppercase';
   color: 'white';
-}
-
-/* .alice-carousel__stage-item {
-  display: flex;
-} */
-
-.alice-carousel {
-  max-height: 300px;
-  display: flex;
 }
 
 .carouselCoinImage {

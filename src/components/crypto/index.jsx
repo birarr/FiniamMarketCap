@@ -2,10 +2,10 @@ import React from 'react'
 
 import './styles.css'
 
-export const Crypto = ({ crypto }) => {
+export const Crypto = ({ crypto, currency }) => {
   const formatter = new Intl.NumberFormat('en-US', {
     style: 'currency',
-    currency: 'EUR',
+    currency,
   })
 
   const numberWithCommas = (x) => {

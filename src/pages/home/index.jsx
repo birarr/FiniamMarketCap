@@ -1,4 +1,4 @@
-import React, { useState, useMemo, useCallback } from 'react'
+import React, { useState, useCallback, useEffect } from 'react'
 import { useInfiniteQuery } from 'react-query'
 import { Link } from 'react-router-dom'
 import InfiniteScroll from 'react-infinite-scroller'
@@ -13,10 +13,11 @@ export const Home = () => {
   const [page, setPage] = useState(1)
   const [color, setColor] = useState('#DADADA')
   const [loading, setLoading] = useState(true)
+  const [currency, setCurrency] = useState('EUR')
 
   const fetchCryptos = async () => {
     const response = await fetch(
-      `https://api.coingecko.com/api/v3/coins/markets?vs_currency=EUR&order=market_cap_desc&per_page=20&page=${page}&sparkline=false&price_change_percentage=24h`
+      `https://api.coingecko.com/api/v3/coins/markets?vs_currency=${currency}&order=market_cap_desc&per_page=20&page=${page}&sparkline=false&price_change_percentage=24h`
     )
 
     return response.json()
@@ -29,25 +30,29 @@ export const Home = () => {
     fetchNextPage,
     hasNextPage,
     isFetching,
+    refetch,
     isFetchingNextPage,
   } = useInfiniteQuery('cryptos', fetchCryptos, {
     getNextPageParam: () => (page < 6 ? true : undefined),
   })
 
+  useEffect(() => {
+    refetch()
+  }, [currency])
+
   const handlePagination = useCallback(() => {
-    console.log('deuuuuu')
     fetchNextPage()
     setPage((page) => page + 1)
   }, [])
 
   console.log({ cryptosData })
-  console.log({ page })
+  console.log({ currency })
 
   return (
     <>
-      <div>
-        <Header />
-        {/* <Banner /> */}
+      <div className="homeContainer">
+        <Header setCurrency={setCurrency} />
+        <Banner />
         {cryptosStatus === 'loading' && (
           <div className="fetchLoading">
             <ClipLoader color={color} loading={loading} size={50} />
@@ -75,7 +80,7 @@ export const Home = () => {
                 </div>
               }
               style={{
-                width: '90%',
+                width: '100vw',
                 margin: 'auto',
                 background: '#fff',
               }}
@@ -87,7 +92,11 @@ export const Home = () => {
                     to={`cryptoDetails/${crypto?.id}`}
                     className="listLink"
                   >
-                    <Crypto key={crypto?.name} crypto={crypto} />
+                    <Crypto
+                      key={crypto?.name}
+                      crypto={crypto}
+                      currency={currency}
+                    />
                   </Link>
                 ))
               )}

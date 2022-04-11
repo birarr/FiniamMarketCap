@@ -36,6 +36,7 @@ export const CryptoDetails = () => {
   return (
     <>
       <div className="courses-container">
+        <IoMdArrowRoundBack className="backButton" onClick={handleBackPage} />
         {cryptoStatus === 'loading' && (
           <div className="fetchLoading">
             <ClipLoader color={color} loading={loading} size={50} />
@@ -52,10 +53,10 @@ export const CryptoDetails = () => {
             <div className="cryptoInfos">
               <div className="cryptoCategories">
                 {cryptoData?.categories.map((category) => (
-                  <div className="cryptoCategory">{cryptoData?.categories}</div>
+                  <div className="cryptoCategory">{category?.categories}</div>
                 ))}
               </div>
-              <div>
+              <div className="cryptoCurrentPrice">
                 {formatter.format(cryptoData?.market_data?.current_price?.eur)}
               </div>
               <div className="cryptoTotalVolume">
@@ -63,11 +64,16 @@ export const CryptoDetails = () => {
               </div>
               {cryptoData?.market_data?.price_change_percentage_24h > 0 ? (
                 <div className="positiveChange">
-                  +{cryptoData?.market_data?.price_change_percentage_24h}
+                  +
+                  {cryptoData?.market_data?.price_change_percentage_24h.toFixed(
+                    2
+                  )}
                 </div>
               ) : (
                 <div className="negativeChange">
-                  {cryptoData?.market_data?.price_change_percentage_24h}
+                  {cryptoData?.market_data?.price_change_percentage_24h.toFixed(
+                    2
+                  )}
                 </div>
               )}
             </div>

@@ -6,7 +6,7 @@ import './styles.css'
 export const Banner = () => {
   return (
     <div>
-      <Carousel className="carousel" />
+      <Carousel />
     </div>
   )
 }
