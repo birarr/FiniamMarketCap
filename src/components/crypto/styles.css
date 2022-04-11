@@ -51,3 +51,13 @@ p {
 .rightArrow {
   margin-right: 20px;
 }
+
+@media only screen and (max-width: 600px) {
+  .cryptoWrapper {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+
+  .cryptoWrapper div:nth-child(4) {
+    display: none;
+  }
+}

@@ -6,7 +6,6 @@ import ClipLoader from 'react-spinners/ClipLoader'
 import { Crypto } from '../../components/crypto'
 import { Banner } from '../../components/banner'
 import { Header } from '../../components/header'
-import { Table } from '../../components/table'
 
 import './styles.css'
 
@@ -15,28 +14,9 @@ export const Home = () => {
   const [color, setColor] = useState('#DADADA')
   const [loading, setLoading] = useState(true)
 
-  const columns = useMemo(() => [
-    {
-      Header: 'Coin',
-      accessor: 'name',
-    },
-    {
-      Header: 'Price',
-      accessor: 'current_price',
-    },
-    {
-      Header: '24h Change',
-      accessor: 'market_cap_change_24h',
-    },
-    // {
-    //   Header: 'Market Cap',
-    //   accessor: 'name',
-    // },
-  ])
-
   const fetchCryptos = async () => {
     const response = await fetch(
-      `https://api.coingecko.com/api/v3/coins/markets?vs_currency=USD&order=market_cap_desc&per_page=20&page=${page}&sparkline=false&price_change_percentage=24h`
+      `https://api.coingecko.com/api/v3/coins/markets?vs_currency=EUR&order=market_cap_desc&per_page=20&page=${page}&sparkline=false&price_change_percentage=24h`
     )
 
     return response.json()
@@ -60,12 +40,8 @@ export const Home = () => {
     setPage((page) => page + 1)
   }, [])
 
-  console.log({ hasNextPage })
+  console.log({ cryptosData })
   console.log({ page })
-
-  //   const data = cryptosData?.pages?.map((crypto) => {
-  //     return crypto
-  //   })
 
   return (
     <>
@@ -108,7 +84,7 @@ export const Home = () => {
                 page?.map((crypto, index) => (
                   <Link
                     key={index}
-                    to={`characterdetails/${index + 1}`}
+                    to={`cryptoDetails/${crypto?.id}`}
                     className="listLink"
                   >
                     <Crypto key={crypto?.name} crypto={crypto} />
@@ -118,11 +94,6 @@ export const Home = () => {
             </InfiniteScroll>
           </>
         )}
-        {/* {!isLoading ? (
-          <Table columns={columns} cryptosData={cryptosData} />
-        ) : (
-          <div>hello</div>
-        )} */}
       </div>
     </>
   )

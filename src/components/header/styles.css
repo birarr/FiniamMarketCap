@@ -4,5 +4,7 @@
 }
 
 .headerContainer h1 {
+  width: 100vw;
   color: #fff;
+  margin-left: 40px;
 }
